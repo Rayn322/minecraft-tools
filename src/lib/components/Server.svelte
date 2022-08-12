@@ -1,0 +1,67 @@
+<script lang="ts">
+	import type { JavaStatusResponse } from 'minecraft-server-util';
+
+	export let response: JavaStatusResponse;
+	let style = '';
+
+	if (response.favicon) {
+		style = `background-image: url(${response.favicon}), url('/images/background.png')`;
+	}
+</script>
+
+<div class="server" id="server" {style}>
+	<div class="details">
+		<span class="name">Minecraft Server</span>
+		<span class="ping">
+			{response.players.online}<span class="slash">/</span>{response.players.max}
+			<img class="icon" src="/images/download.png" alt="ping icon" />
+		</span>
+	</div>
+	<span class="motd">
+		{@html response.motd.html.replaceAll('\n', '<br>')}
+	</span>
+</div>
+
+<style>
+	@font-face {
+		font-family: 'Minecraft';
+		font-weight: 400;
+		font-style: normal;
+		src: url('/fonts/Minecraftia-Regular.ttf') format('truetype');
+	}
+
+	.server {
+		background-image: url('/images/unknown_server64.png'), url('/images/background.png');
+		background-repeat: no-repeat, repeat;
+		background-position: 0.25em 0.25em;
+		font-family: 'Minecraft', sans-serif;
+		color: white;
+		padding: 0.25em 0.25em 0.25em 4.75em;
+		height: 4em;
+		width: 33.75em;
+		margin: 0 auto;
+		line-height: 1.25em;
+	}
+
+	.details {
+		margin-top: 0.25em;
+	}
+
+	.ping {
+		float: right;
+		color: #aaaaaa;
+	}
+
+	.icon {
+		position: relative;
+		top: -0.4em;
+	}
+
+	.slash {
+		color: #555555;
+	}
+
+	.motd {
+		white-space: pre-wrap;
+	}
+</style>
