@@ -1,7 +1,15 @@
 <script lang="ts">
-	import type { JavaStatusResponse } from 'minecraft-server-util';
+	// Suggestion (check code before using, and possibly convert to data.X access later):
+	// import type { PageData } from './$types';
+	//
+	// $: ({ response } = data);
 
-	export let response: JavaStatusResponse;
+	import type { JavaStatusResponse } from 'minecraft-server-util';
+	import type { PageData } from './$types';
+
+	// export let response: JavaStatusResponse;
+	export let data: PageData;
+	$: ({ response } = data);
 </script>
 
 <div class="server">

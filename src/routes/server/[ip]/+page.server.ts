@@ -1,15 +1,9 @@
 import { status, type JavaStatusResponse } from 'minecraft-server-util';
 
-/** @type {import('@sveltejs/kit').RequestHandler} */
-export async function GET({ params }: { params: { ip: string } }) {
+/** @type {import('@sveltejs/kit').PageServerLoad} */
+export async function load({ params }: { params: { ip: string } }) {
 	return {
-		status: 200,
-		headers: {
-			'access-control-allow-origin': '*'
-		},
-		body: {
-			response: await pingServer(params.ip)
-		}
+		response: await pingServer(params.ip)
 	};
 }
 
