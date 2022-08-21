@@ -1,26 +1,43 @@
 <script lang="ts">
+	import { page } from '$app/stores';
+
 	import type { JavaStatusResponse } from 'minecraft-server-util';
 
-	export let response: JavaStatusResponse;
+	export let ip: string;
+	$: status = getServerStatus(ip);
 	let style = '';
 
-	if (response.favicon) {
-		style = `background-image: url(${response.favicon}), url('/images/background.png')`;
+	async function getServerStatus(ip: string): Promise<JavaStatusResponse> {
+		console.log($page.url.hostname);
+
+		let json: JavaStatusResponse;
+		let res = await fetch(`http://${$page.url.hostname}:${$page.url.port}/api/server/${ip}`);
+		json = await res.json();
+
+		if (json.favicon) {
+			style = `background-image: url(${json.favicon}), url('/images/background.png')`;
+		}
+
+		return json;
 	}
 </script>
 
-<div class="server" id="server" {style}>
-	<div class="details">
-		<span class="name">Minecraft Server</span>
-		<span class="ping">
-			{response.players.online}<span class="slash">/</span>{response.players.max}
-			<img class="icon" src="/images/download.png" alt="ping icon" />
+{#await status}
+	<p>Loading</p>
+{:then serverStatus}
+	<div class="server" id="server" {style}>
+		<div class="details">
+			<span class="name">Minecraft Server</span>
+			<span class="ping">
+				{serverStatus.players.online}<span class="slash">/</span>{serverStatus.players.max}
+				<img class="icon" src="/images/download.png" alt="ping icon" />
+			</span>
+		</div>
+		<span class="motd">
+			{@html serverStatus.motd.html.replaceAll('\n', '<br>')}
 		</span>
 	</div>
-	<span class="motd">
-		{@html response.motd.html.replaceAll('\n', '<br>')}
-	</span>
-</div>
+{/await}
 
 <style>
 	@font-face {

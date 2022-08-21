@@ -1,10 +1,8 @@
 import { status, type JavaStatusResponse } from 'minecraft-server-util';
 
-/** @type {import('@sveltejs/kit').PageServerLoad} */
-export async function load({ params }: { params: { ip: string } }) {
-	return {
-		response: await pingServer(params.ip)
-	};
+/** @type {import('./$types').RequestHandler} */
+export async function GET({ params }: { params: { ip: string } }) {
+	return new Response(JSON.stringify(await pingServer(params.ip)));
 }
 
 async function pingServer(server: string): Promise<JavaStatusResponse> {

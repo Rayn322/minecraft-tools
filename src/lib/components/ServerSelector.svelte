@@ -12,9 +12,5 @@
 
 <form on:submit|preventDefault={onSubmit}>
 	<label for="ip">Enter server IP</label>
-	<input type="text" name="ip" id="ip" bind:value={text} disabled={loading} />
+	<input type="text" name="ip" id="ip" bind:value={text} />
 </form>
-
-{#if loading}
-	<p>loading</p>
-{/if}

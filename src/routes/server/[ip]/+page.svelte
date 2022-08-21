@@ -1,11 +1,10 @@
 <script lang="ts">
+	import { page } from '$app/stores';
 	import Server from '$lib/components/Server.svelte';
 	import ServerSelector from '$lib/components/ServerSelector.svelte';
-	import type { PageData } from './$types';
 
-	export let data: PageData;
-	$: ({ response } = data);
+	$: ip = $page.params.ip;
 </script>
 
 <ServerSelector />
-<Server {response} />
+<Server {ip} />
