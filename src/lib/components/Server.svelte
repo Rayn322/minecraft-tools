@@ -11,7 +11,7 @@
 		console.log($page.url.hostname);
 
 		let json: JavaStatusResponse;
-		let res = await fetch(`http://${$page.url.hostname}:${$page.url.port}/api/server/${ip}`);
+		let res = await fetch(`https://${$page.url.hostname}:${$page.url.port}/api/server/${ip}`);
 		json = await res.json();
 
 		if (json.favicon) {
