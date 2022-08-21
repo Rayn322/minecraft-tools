@@ -1,23 +1,16 @@
 <script lang="ts">
-	import { page } from '$app/stores';
-
 	import type { JavaStatusResponse } from 'minecraft-server-util';
 
-	// export let ip: string;
 	export let status: JavaStatusResponse;
-	let style = '';
+	$: style = getBackgroundStyle(status.favicon);
 
-	// async function getServerStatus(ip: string): Promise<JavaStatusResponse> {
-	// 	let json: JavaStatusResponse;
-	// 	let res = await fetch(`https://${$page.url.hostname}:${$page.url.port}/api/server/${ip}`);
-	// 	json = await res.json();
-
-	// 	if (json.favicon) {
-	// 		style = `background-image: url(${json.favicon}), url('/images/background.png')`;
-	// 	}
-
-	// 	return json;
-	// }
+	function getBackgroundStyle(favicon: string | null) {
+		if (favicon) {
+			return `background-image: url(${status.favicon}), url('/images/background.png')`;
+		} else {
+			return '';
+		}
+	}
 </script>
 
 {#await status}
