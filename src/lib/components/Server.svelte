@@ -3,21 +3,21 @@
 
 	import type { JavaStatusResponse } from 'minecraft-server-util';
 
-	export let ip: string;
-	$: status = getServerStatus(ip);
+	// export let ip: string;
+	export let status: JavaStatusResponse;
 	let style = '';
 
-	async function getServerStatus(ip: string): Promise<JavaStatusResponse> {
-		let json: JavaStatusResponse;
-		let res = await fetch(`https://${$page.url.hostname}:${$page.url.port}/api/server/${ip}`);
-		json = await res.json();
+	// async function getServerStatus(ip: string): Promise<JavaStatusResponse> {
+	// 	let json: JavaStatusResponse;
+	// 	let res = await fetch(`https://${$page.url.hostname}:${$page.url.port}/api/server/${ip}`);
+	// 	json = await res.json();
 
-		if (json.favicon) {
-			style = `background-image: url(${json.favicon}), url('/images/background.png')`;
-		}
+	// 	if (json.favicon) {
+	// 		style = `background-image: url(${json.favicon}), url('/images/background.png')`;
+	// 	}
 
-		return json;
-	}
+	// 	return json;
+	// }
 </script>
 
 {#await status}
