@@ -1,9 +1,13 @@
+import type { RequestHandler } from './$types';
 import { status, type JavaStatusResponse } from 'minecraft-server-util';
 
-/** @type {import('./$types').RequestHandler} */
-export async function GET({ params }: { params: { ip: string } }) {
+// export async function GET({ params }: { params: { ip: string } }): RequestHandler {
+// 	return new Response(JSON.stringify(await pingServer(params.ip)));
+// }
+
+export const GET: RequestHandler = async ({ params }) => {
 	return new Response(JSON.stringify(await pingServer(params.ip)));
-}
+};
 
 async function pingServer(server: string): Promise<JavaStatusResponse> {
 	let pingResult: JavaStatusResponse = {
