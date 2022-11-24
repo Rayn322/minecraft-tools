@@ -27,7 +27,6 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"jsdom": "^20.0.3",
 		"minecraft-server-util": "^5.3.1"
 	}
 }
