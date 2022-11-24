@@ -12,8 +12,8 @@
 		}
 	}
 
-	function getParsedMotd(motd: string) {
-		let lines = motd.split('\n');
+	function getParsedMotd(html: string) {
+		let lines = html.split('\n');
 		lines = lines.map((line) => `<div class="line">${line}</div>`);
 		return lines.join('');
 	}
@@ -30,21 +30,15 @@
 				<img class="icon" src="/images/download.png" alt="ping icon" />
 			</span>
 		</div>
-		<div class="motd">
-			{@html serverStatus.motd.html}
-		</div>
-	</div>
-	<div class="server" id="server" {style}>
-		<div class="details">
-			<span class="name">Minecraft Server</span>
-			<span class="ping">
-				{serverStatus.players.online}<span class="slash">/</span>{serverStatus.players.max}
-				<img class="icon" src="/images/download.png" alt="ping icon" />
-			</span>
-		</div>
-		<div class="centered">
-			{@html getParsedMotd(serverStatus.motd.html)}
-		</div>
+		{#if serverStatus.motd.clean.startsWith(' ')}
+			<div class="centered">
+				{@html getParsedMotd(serverStatus.motd.html)}
+			</div>
+		{:else}
+			<div class="motd">
+				{@html serverStatus.motd.html}
+			</div>
+		{/if}
 	</div>
 {/await}
 
