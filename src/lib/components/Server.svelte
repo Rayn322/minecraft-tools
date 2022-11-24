@@ -11,6 +11,12 @@
 			return '';
 		}
 	}
+
+	function getParsedMotd(motd: string) {
+		let lines = motd.split('\n');
+		lines = lines.map((line) => `<div class="line">${line}</div>`);
+		return lines.join('');
+	}
 </script>
 
 {#await status}
@@ -24,9 +30,21 @@
 				<img class="icon" src="/images/download.png" alt="ping icon" />
 			</span>
 		</div>
-		<span class="motd">
-			{@html serverStatus.motd.html.replaceAll('\n', '<br>')}
-		</span>
+		<div class="motd">
+			{@html serverStatus.motd.html}
+		</div>
+	</div>
+	<div class="server" id="server" {style}>
+		<div class="details">
+			<span class="name">Minecraft Server</span>
+			<span class="ping">
+				{serverStatus.players.online}<span class="slash">/</span>{serverStatus.players.max}
+				<img class="icon" src="/images/download.png" alt="ping icon" />
+			</span>
+		</div>
+		<div class="centered">
+			{@html getParsedMotd(serverStatus.motd.html)}
+		</div>
 	</div>
 {/await}
 
@@ -71,5 +89,13 @@
 
 	.motd {
 		white-space: pre-wrap;
+	}
+
+	.centered {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		width: 90%;
 	}
 </style>
