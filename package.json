@@ -13,21 +13,21 @@
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "next",
 		"@sveltejs/kit": "next",
-		"@typescript-eslint/eslint-plugin": "^5.27.0",
-		"@typescript-eslint/parser": "^5.27.0",
-		"eslint": "^8.16.0",
+		"@typescript-eslint/eslint-plugin": "^5.44.0",
+		"@typescript-eslint/parser": "^5.44.0",
+		"eslint": "^8.28.0",
 		"eslint-plugin-svelte3": "^4.0.0",
-		"svelte": "^3.44.0",
-		"svelte-check": "^2.7.1",
-		"svelte-preprocess": "^4.10.6",
-		"tslib": "^2.3.1",
-		"typescript": "^4.7.4",
-		"util": "^0.12.4",
-		"vite": "^3.0.0"
+		"svelte": "^3.53.1",
+		"svelte-check": "^2.9.2",
+		"svelte-preprocess": "^4.10.7",
+		"tslib": "^2.4.1",
+		"typescript": "^4.9.3",
+		"util": "^0.12.5",
+		"vite": "^3.2.4"
 	},
 	"type": "module",
 	"dependencies": {
-		"jsdom": "^20.0.0",
-		"minecraft-server-util": "^5.3.0"
+		"jsdom": "^20.0.3",
+		"minecraft-server-util": "^5.3.1"
 	}
 }
