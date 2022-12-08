@@ -1,7 +1,7 @@
 <script lang="ts">
-	import type { JavaStatusResponse } from 'minecraft-server-util';
+	import type { StatusResponse } from '$lib/validators';
 
-	export let status: JavaStatusResponse;
+	export let status: StatusResponse;
 	$: style = getBackgroundStyle(status.favicon);
 
 	function getBackgroundStyle(favicon: string | null) {

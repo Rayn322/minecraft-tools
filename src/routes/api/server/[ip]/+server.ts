@@ -1,16 +1,13 @@
 import type { RequestHandler } from './$types';
-import { status, type JavaStatusResponse } from 'minecraft-server-util';
-
-// export async function GET({ params }: { params: { ip: string } }): RequestHandler {
-// 	return new Response(JSON.stringify(await pingServer(params.ip)));
-// }
+import { status } from 'minecraft-server-util';
+import { statusResponse, type StatusResponse } from '$lib/validators';
 
 export const GET: RequestHandler = async ({ params }) => {
 	return new Response(JSON.stringify(await pingServer(params.ip)));
 };
 
-async function pingServer(server: string): Promise<JavaStatusResponse> {
-	let pingResult: JavaStatusResponse = {
+async function pingServer(server: string): Promise<StatusResponse> {
+	const errorResult: StatusResponse = {
 		version: {
 			name: 'No version',
 			protocol: -1
@@ -31,10 +28,9 @@ async function pingServer(server: string): Promise<JavaStatusResponse> {
 	};
 
 	try {
-		pingResult = await status(server);
+		const result = await status(server);
+		return statusResponse.parse(result);
 	} catch (error) {
-		// ignore
+		return errorResult;
 	}
-
-	return pingResult;
 }
