@@ -1,8 +1,8 @@
 <script lang="ts">
 	import type { StatusResponse } from '$lib/validators';
 
-	export let status: StatusResponse;
-	$: style = getBackgroundStyle(status.favicon);
+	let { status }: { status: StatusResponse } = $props();
+	let style = $derived(getBackgroundStyle(status.favicon));
 
 	function getBackgroundStyle(favicon: string | null) {
 		if (favicon) {
