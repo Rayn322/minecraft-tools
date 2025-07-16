@@ -10,27 +10,28 @@ async function pingServer(server: string): Promise<StatusResponse> {
 	const errorResult: StatusResponse = {
 		version: {
 			name: 'No version',
-			protocol: -1
+			protocol: -1,
 		},
 		players: {
 			online: -1,
 			max: -1,
-			sample: null
+			sample: null,
 		},
 		motd: {
 			raw: 'Server not found',
 			clean: 'Server not found',
-			html: 'Server not found'
+			html: 'Server not found',
 		},
 		favicon: null,
 		srvRecord: null,
-		roundTripLatency: -1
+		roundTripLatency: -1,
 	};
 
 	try {
 		const result = await status(server);
 		return statusResponse.parse(result);
 	} catch (error) {
+		console.log(`Error pinging server ${server}:`, error);
 		return errorResult;
 	}
 }
